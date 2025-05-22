@@ -49,13 +49,14 @@ public class Product {
         this.status = Status.ACTIVATED;
     }
 
-    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal value, Integer availableQuantity, Status status) {
+    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal value, Integer availableQuantity, Brand brand, Status status) {
         this.idProduct = idProduct;
         this.description = description;
         this.model = model;
         this.manufacturingDate = manufacturingDate;
         this.value = value;
         this.availableQuantity = availableQuantity;
+        this.brand = brand;
         this.status = status;
     }
 

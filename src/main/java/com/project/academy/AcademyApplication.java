@@ -3,8 +3,10 @@ package com.project.academy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
-@EntityScan(basePackages = {"domains", "domains.enums"})
+@ComponentScan(basePackages = "main.java")
+@EntityScan(basePackages = {"main.java.domains", "main.java.domains.enums"})
 @SpringBootApplication
 public class AcademyApplication {
 

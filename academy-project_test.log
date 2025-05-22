@@ -320,3 +320,81 @@ Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statemen
 2025-05-22T17:05:24.678-03:00  INFO 23295 --- [academy] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-05-22T17:05:24.679-03:00  INFO 23295 --- [academy] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-05-22T17:05:24.685-03:00  INFO 23295 --- [academy] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-05-22T17:56:32.351-03:00  INFO 23295 --- [academy] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-22T17:56:32.359-03:00  INFO 23295 --- [academy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-22T17:56:32.371-03:00  INFO 23295 --- [academy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-22T17:56:32.393-03:00  WARN 23295 --- [academy] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-05-22T17:56:32.395-03:00  INFO 23295 --- [academy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-22T17:56:32.400-03:00  INFO 23295 --- [academy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-22T17:56:36.169-03:00  INFO 26553 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : Starting AcademyApplication using Java 17.0.15 with PID 26553 (/home/enzo/Documents/Projects/academy-project/target/classes started by enzo in /home/enzo/Documents/Projects/academy-project)
+2025-05-22T17:56:36.174-03:00  INFO 26553 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : The following 1 profile is active: "test"
+2025-05-22T17:56:36.243-03:00  INFO 26553 --- [academy] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-22T17:56:36.244-03:00  INFO 26553 --- [academy] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-22T17:56:37.118-03:00  INFO 26553 --- [academy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-22T17:56:37.157-03:00  INFO 26553 --- [academy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 0 JPA repository interfaces.
+2025-05-22T17:56:37.812-03:00  INFO 26553 --- [academy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-22T17:56:37.828-03:00  INFO 26553 --- [academy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-22T17:56:37.828-03:00  INFO 26553 --- [academy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-22T17:56:37.870-03:00  INFO 26553 --- [academy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-22T17:56:37.870-03:00  INFO 26553 --- [academy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1625 ms
+2025-05-22T17:56:38.029-03:00  INFO 26553 --- [academy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-22T17:56:38.230-03:00  INFO 26553 --- [academy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:academydb user=SA
+2025-05-22T17:56:38.234-03:00  INFO 26553 --- [academy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-22T17:56:38.303-03:00  INFO 26553 --- [academy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-22T17:56:38.393-03:00  INFO 26553 --- [academy] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-22T17:56:38.432-03:00  INFO 26553 --- [academy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-22T17:56:38.726-03:00  INFO 26553 --- [academy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-22T17:56:38.806-03:00  INFO 26553 --- [academy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-22T17:56:39.095-03:00  INFO 26553 --- [academy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-22T17:56:39.100-03:00  INFO 26553 --- [academy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-22T17:56:39.190-03:00  WARN 26553 --- [academy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-22T17:56:39.570-03:00  INFO 26553 --- [academy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:academydb'
+2025-05-22T17:56:39.655-03:00  INFO 26553 --- [academy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-22T17:56:39.691-03:00  INFO 26553 --- [academy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-22T17:56:39.705-03:00  INFO 26553 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : Started AcademyApplication in 4.18 seconds (process running for 4.684)
+2025-05-22T17:57:09.915-03:00  INFO 26553 --- [academy] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-22T17:57:09.923-03:00  INFO 26553 --- [academy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-22T17:57:09.936-03:00  INFO 26553 --- [academy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-22T17:57:09.952-03:00  WARN 26553 --- [academy] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-05-22T17:57:09.954-03:00  INFO 26553 --- [academy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-22T17:57:09.960-03:00  INFO 26553 --- [academy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-22T17:58:15.709-03:00  INFO 26938 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : Starting AcademyApplication using Java 17.0.15 with PID 26938 (/home/enzo/Documents/Projects/academy-project/target/classes started by enzo in /home/enzo/Documents/Projects/academy-project)
+2025-05-22T17:58:15.713-03:00  INFO 26938 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : The following 1 profile is active: "test"
+2025-05-22T17:58:15.777-03:00  INFO 26938 --- [academy] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-22T17:58:15.777-03:00  INFO 26938 --- [academy] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-22T17:58:16.644-03:00  INFO 26938 --- [academy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-22T17:58:16.693-03:00  INFO 26938 --- [academy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 JPA repository interfaces.
+2025-05-22T17:58:17.413-03:00  INFO 26938 --- [academy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-22T17:58:17.429-03:00  INFO 26938 --- [academy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-22T17:58:17.430-03:00  INFO 26938 --- [academy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-22T17:58:17.501-03:00  INFO 26938 --- [academy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-22T17:58:17.502-03:00  INFO 26938 --- [academy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1724 ms
+2025-05-22T17:58:17.723-03:00  INFO 26938 --- [academy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-22T17:58:17.976-03:00  INFO 26938 --- [academy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:academydb user=SA
+2025-05-22T17:58:17.980-03:00  INFO 26938 --- [academy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-22T17:58:18.052-03:00  INFO 26938 --- [academy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-22T17:58:18.104-03:00  INFO 26938 --- [academy] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-22T17:58:18.148-03:00  INFO 26938 --- [academy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-22T17:58:18.483-03:00  INFO 26938 --- [academy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-22T17:58:18.574-03:00  INFO 26938 --- [academy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-22T17:58:18.979-03:00  INFO 26938 --- [academy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-22T17:58:18.988-03:00  INFO 26938 --- [academy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-22T17:58:19.089-03:00  WARN 26938 --- [academy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-22T17:58:19.531-03:00  INFO 26938 --- [academy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:academydb'
+2025-05-22T17:58:19.614-03:00  INFO 26938 --- [academy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-22T17:58:19.651-03:00  INFO 26938 --- [academy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-22T17:58:19.664-03:00  INFO 26938 --- [academy] [restartedMain] com.project.academy.AcademyApplication   : Started AcademyApplication in 4.586 seconds (process running for 5.131)
