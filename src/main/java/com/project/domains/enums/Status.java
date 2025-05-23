@@ -5,19 +5,19 @@ public enum Status {
     DISABLED(0, "DISABLED"),
     ACTIVATED(1, "ACTIVATED");
 
-    private int idStatus;
+    private Integer idStatus;
     private String description;
 
-    Status(int idStatus, String description) {
+    Status(Integer idStatus, String description) {
         this.idStatus = idStatus;
         this.description = description;
     }
 
-    public int getIdStatus() {
+    public Integer getIdStatus() {
         return idStatus;
     }
 
-    public void setIdStatus(int idStatus) {
+    public void setIdStatus(Integer idStatus) {
         this.idStatus = idStatus;
     }
 
