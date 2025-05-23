@@ -150,7 +150,7 @@ public class DBService {
                 "Emilly123"
         );
 
-        Order order01 = new Order(
+        ServiceOrder serviceOrder01 = new ServiceOrder(
                 null,
                 "Academy order",
                 LocalDate.now(),
@@ -171,6 +171,6 @@ public class DBService {
         employeeReposiroty.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
-        orderRepository.save(order01);
+        orderRepository.save(serviceOrder01);
     }
 }

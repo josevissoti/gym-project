@@ -10,12 +10,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "serviceOrder")
+public class ServiceOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idOrder;
+    private UUID idServiceOrder;
 
     @NotBlank
     @NotNull
@@ -38,11 +38,11 @@ public class Order {
     @JoinColumn(name = "iduser")
     private Employee employee;
 
-    public Order() {
+    public ServiceOrder() {
     }
 
-    public Order(UUID idOrder, String description, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee) {
-        this.idOrder = idOrder;
+    public ServiceOrder(UUID idServiceOrder, String description, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee) {
+        this.idServiceOrder = idServiceOrder;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -51,12 +51,12 @@ public class Order {
         this.employee = employee;
     }
 
-    public UUID getIdOrder() {
-        return idOrder;
+    public UUID getIdServiceOrder() {
+        return idServiceOrder;
     }
 
-    public void setIdOrder(UUID idOrder) {
-        this.idOrder = idOrder;
+    public void setIdServiceOrder(UUID idServiceOrder) {
+        this.idServiceOrder = idServiceOrder;
     }
 
     public String getDescription() {
@@ -110,12 +110,12 @@ public class Order {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(idOrder, order.idOrder) && Objects.equals(description, order.description);
+        ServiceOrder serviceOrder = (ServiceOrder) o;
+        return Objects.equals(idServiceOrder, serviceOrder.idServiceOrder) && Objects.equals(description, serviceOrder.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idOrder, description);
+        return Objects.hash(idServiceOrder, description);
     }
 }

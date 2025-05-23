@@ -16,7 +16,7 @@ public class User extends Person {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Order> orders = new ArrayList<>();
+    private List<ServiceOrder> serviceOrders = new ArrayList<>();
 
     public User(Long idPerson, String name, String cpf, String rg, LocalDate birthDate, LocalDate createDate, String phone, String email, String password) {
         super(idPerson, name, cpf, rg, birthDate, createDate, phone, email, password);
@@ -28,11 +28,11 @@ public class User extends Person {
         addPersonRole(PersonRole.USER);
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<ServiceOrder> getOrders() {
+        return serviceOrders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
     }
 }
