@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "academy")
+@Table(name = "academyOrder")
 public class AcademyOrder extends ServiceOrder {
 
     public AcademyOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
@@ -18,5 +18,14 @@ public class AcademyOrder extends ServiceOrder {
 
     public AcademyOrder() {
         super.setDescription("Academy Order");
+    }
+
+    @Override
+    public void addOrderItem(Product product, int quantity) {
+        if (product instanceof Product) {
+            super.addOrderItem(product, quantity);
+        } else {
+            throw new IllegalArgumentException("Invalid Product");
+        }
     }
 }

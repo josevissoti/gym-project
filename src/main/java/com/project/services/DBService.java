@@ -19,10 +19,13 @@ public class DBService {
     private BrandRepository brandRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private AcademyProductRepository academyProductRepository;
 
     @Autowired
-    private EmployeeReposiroty employeeReposiroty;
+    private SportProductRepository sportProductRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -63,7 +66,7 @@ public class DBService {
         );
 
         // Create products
-        Product product01 = new Product(
+        SportProduct sportProduct01 = new SportProduct(
                 null,
                 "Air Max Running Shoes",
                 "AIRMAX-2023",
@@ -74,7 +77,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        Product product02 = new Product(
+        SportProduct sportProduct02 = new SportProduct(
                 null,
                 "Ultraboost Shoes",
                 "ULTRABOOST-22",
@@ -85,7 +88,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        Product product03 = new Product(
+        AcademyProduct academyProduct01 = new AcademyProduct(
                 null,
                 "Galaxy S23 Smartphone",
                 "GALAXY-S23",
@@ -96,7 +99,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        Product product04 = new Product(
+        AcademyProduct academyProduct02 = new AcademyProduct(
                 null,
                 "T-shirt Sportswear",
                 "TSHIRT-SPORT",
@@ -178,12 +181,12 @@ public class DBService {
         brandRepository.save(brand01);
         brandRepository.save(brand02);
         brandRepository.save(brand03);
-        productRepository.save(product01);
-        productRepository.save(product02);
-        productRepository.save(product03);
-        productRepository.save(product04);
-        employeeReposiroty.save(employee01);
-        employeeReposiroty.save(employee02);
+        academyProductRepository.save(academyProduct01);
+        academyProductRepository.save(academyProduct02);
+        sportProductRepository.save(sportProduct01);
+        sportProductRepository.save(sportProduct02);
+        employeeRepository.save(employee01);
+        employeeRepository.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
         academyOrderRepository.save(academyOrder01);

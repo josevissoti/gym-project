@@ -9,11 +9,14 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product")
-public class Product {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_product")
@@ -42,6 +45,9 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     @JoinColumn(name = "status")
     private Status status;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public Product() {
         this.status = Status.ACTIVATED;
@@ -120,6 +126,14 @@ public class Product {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override

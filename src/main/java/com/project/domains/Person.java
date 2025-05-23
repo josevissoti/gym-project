@@ -19,7 +19,7 @@ public abstract class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_person")
-    @SequenceGenerator(name = "ser_person", sequenceName = "seq_person", allocationSize = 1)
+    @SequenceGenerator(name = "seq_person", sequenceName = "seq_person", allocationSize = 1)
     protected Long idPerson;
 
     @NotBlank

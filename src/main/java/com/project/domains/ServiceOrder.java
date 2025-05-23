@@ -7,15 +7,19 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "serviceOrder")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ServiceOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @SequenceGenerator(name = "seq_serviceOrder", sequenceName = "seq_serviceOrder", allocationSize = 1)
     private UUID idServiceOrder;
 
     @NotBlank
@@ -39,9 +43,8 @@ public abstract class ServiceOrder {
     @JoinColumn(name = "iduser")
     private Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "idfreight")
-    private Freight freight;
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public ServiceOrder() {
     }
@@ -53,7 +56,6 @@ public abstract class ServiceOrder {
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
-        this.freight = freight;
     }
 
     public UUID getIdServiceOrder() {
@@ -112,12 +114,12 @@ public abstract class ServiceOrder {
         this.employee = employee;
     }
 
-    public Freight getFreight() {
-        return freight;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setFreight(Freight freight) {
-        this.freight = freight;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override
@@ -130,5 +132,9 @@ public abstract class ServiceOrder {
     @Override
     public int hashCode() {
         return Objects.hash(idServiceOrder, description);
+    }
+
+    public void addOrderItem(Product product, int quantity) {
+
     }
 }
