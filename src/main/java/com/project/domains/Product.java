@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_product")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_product")
     private Long idProduct;
 
     @NotBlank
@@ -31,7 +31,7 @@ public class Product {
     private LocalDate manufacturingDate;
 
     @Digits(integer = 15, fraction = 2)
-    private BigDecimal value;
+    private BigDecimal productValue;
 
     private int availableQuantity;
 
@@ -47,12 +47,12 @@ public class Product {
         this.status = Status.ACTIVATED;
     }
 
-    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal value, int availableQuantity, Brand brand, Status status) {
+    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal productValue, int availableQuantity, Brand brand, Status status) {
         this.idProduct = idProduct;
         this.description = description;
         this.model = model;
         this.manufacturingDate = manufacturingDate;
-        this.value = value;
+        this.productValue = productValue;
         this.availableQuantity = availableQuantity;
         this.brand = brand;
         this.status = status;
@@ -90,12 +90,12 @@ public class Product {
         this.manufacturingDate = manufacturingDate;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getProductValue() {
+        return productValue;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setProductValue(BigDecimal productValue) {
+        this.productValue = productValue;
     }
 
     public int getAvailableQuantity() {

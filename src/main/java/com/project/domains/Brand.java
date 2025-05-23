@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Brand {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_brand")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_brand")
     private Integer idBrand;
 
     @NotNull
