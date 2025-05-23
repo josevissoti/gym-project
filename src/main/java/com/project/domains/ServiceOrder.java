@@ -1,6 +1,7 @@
 package com.project.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.services.strategy.orderfreight.Freight;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "serviceOrder")
-public class ServiceOrder {
+public abstract class ServiceOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -38,17 +39,21 @@ public class ServiceOrder {
     @JoinColumn(name = "iduser")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "idfreight")
+    private Freight freight;
+
     public ServiceOrder() {
     }
 
-    public ServiceOrder(UUID idServiceOrder, String description, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee) {
+    public ServiceOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
         this.idServiceOrder = idServiceOrder;
-        this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
+        this.freight = freight;
     }
 
     public UUID getIdServiceOrder() {
@@ -105,6 +110,14 @@ public class ServiceOrder {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Freight getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Freight freight) {
+        this.freight = freight;
     }
 
     @Override

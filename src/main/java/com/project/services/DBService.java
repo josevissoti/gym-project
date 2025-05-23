@@ -3,6 +3,8 @@ package com.project.services;
 import com.project.domains.*;
 import com.project.domains.enums.Status;
 import com.project.repositories.*;
+import com.project.services.strategy.orderfreight.AirFreight;
+import com.project.services.strategy.orderfreight.LandFreight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,10 @@ public class DBService {
     private UserRepository userRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private AcademyOrderRepository academyOrderRepository;
+
+    @Autowired
+    private SportOrderRepository sportOrderRepository;
 
     public void initDB() {
         // Create brands
@@ -150,14 +155,24 @@ public class DBService {
                 "Emilly123"
         );
 
-        ServiceOrder serviceOrder01 = new ServiceOrder(
+        AcademyOrder academyOrder01 = new AcademyOrder(
                 null,
-                "Academy order",
                 LocalDate.now(),
-                LocalDate.of(2025, 05, 27),
-                LocalDate.of(2025, 05, 30),
+                LocalDate.of(2025, Month.MAY, 27),
+                LocalDate.of(2025, Month.MAY, 30),
                 user02,
-                employee01
+                employee01,
+                new AirFreight()
+        );
+
+        SportOrder sportOrder01 = new SportOrder(
+                null,
+                LocalDate.now(),
+                LocalDate.of(2025, Month.JUNE, 5),
+                LocalDate.of(2025, Month.JUNE, 10),
+                user01,
+                employee02,
+                new LandFreight()
         );
 
         brandRepository.save(brand01);
@@ -171,6 +186,7 @@ public class DBService {
         employeeReposiroty.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
-        orderRepository.save(serviceOrder01);
+        academyOrderRepository.save(academyOrder01);
+        sportOrderRepository.save(sportOrder01);
     }
 }
