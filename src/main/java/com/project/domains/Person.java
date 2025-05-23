@@ -1,6 +1,10 @@
 package com.project.domains;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.enums.PersonRole;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -8,17 +12,51 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "person")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_person")
+    @SequenceGenerator(name = "ser_person", sequenceName = "seq_person", allocationSize = 1)
     protected Long idPerson;
+
+    @NotBlank
+    @NotNull
     protected String name;
+
+    @NotBlank
+    @NotNull
+    @Column(unique = true)
     protected String cpf;
+
+    @NotBlank
+    @NotNull
     protected String rg;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate birthDate;
-    protected LocalDate createDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    protected LocalDate createDate = LocalDate.now();
+
+    @NotBlank
+    @NotNull
     protected String phone;
+
+    @NotBlank
+    @NotNull
+    @Column(unique = true)
     protected String email;
+
+    @NotBlank
+    @NotNull
     protected String password;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "profiles", joinColumns = @JoinColumn(name = "person_id"))
+    @Column(name = "person_type")
     protected Set<Integer> personRole = new HashSet<>();
 
     public Person() {

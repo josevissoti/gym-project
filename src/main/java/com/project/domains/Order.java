@@ -1,16 +1,41 @@
 package com.project.domains;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Table(name = "order")
 public class Order {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID idOrder;
+
+    @NotBlank
+    @NotNull
     private String description;
-    private LocalDate startDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate startDate = LocalDate.now();
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate deadline;
+
+    @ManyToOne
+    @JoinColumn(name = "idemployee")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "iduser")
     private Employee employee;
 
     public Order() {
