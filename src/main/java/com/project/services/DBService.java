@@ -1,12 +1,10 @@
 package com.project.services;
 
-import com.project.domains.Brand;
-import com.project.domains.Product;
+import com.project.domains.*;
 import com.project.domains.enums.Status;
+import com.project.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.project.repositories.BrandRepository;
-import com.project.repositories.ProductRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,10 +14,19 @@ import java.time.Month;
 public class DBService {
 
     @Autowired
-    private BrandRepository brandRepo;
+    private BrandRepository brandRepository;
 
     @Autowired
-    private ProductRepository productRepo;
+    private ProductRepository productRepository;
+
+    @Autowired
+    private EmployeeReposiroty employeeReposiroty;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     public void initDB() {
         // Create brands
@@ -95,13 +102,75 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        brandRepo.save(brand01);
-        brandRepo.save(brand02);
-        brandRepo.save(brand03);
-        productRepo.save(product01);
-        productRepo.save(product02);
-        productRepo.save(product03);
-        productRepo.save(product04);
+        Employee employee01 = new Employee(
+                null,
+                "Luis Silva",
+                "847.521.482-12",
+                "58.552.148-7",
+                LocalDate.of(2001, Month.APRIL, 14),
+                LocalDate.now(),
+                "048995142578",
+                "luissilva@email.com",
+                "LuisSilva123"
+        );
 
+        Employee employee02 = new Employee(
+                null,
+                "Ana Clara",
+                "548.241.846-27",
+                "95.017.885-9",
+                LocalDate.of(1995, Month.OCTOBER, 7),
+                LocalDate.now(),
+                "25485142684",
+                "anaclara@email.com",
+                "AnaClara123"
+        );
+
+        User user01 = new User(
+                null,
+                "Sebastiao",
+                "455.233.789-63",
+                "58.248.336-8",
+                LocalDate.of(1986, Month.MAY, 30),
+                LocalDate.now(),
+                "85442695517",
+                "sebastiao@email.com",
+                "Sebastiao123"
+        );
+
+        User user02 = new User(
+                null,
+                "Emilly",
+                "578.225.369-77",
+                "42.845.475-8",
+                LocalDate.of(1986, Month.JULY, 19),
+                LocalDate.now(),
+                "17885695233",
+                "emilly@email.com",
+                "Emilly123"
+        );
+
+        Order order01 = new Order(
+                null,
+                "Academy order",
+                LocalDate.now(),
+                LocalDate.of(2025, 05, 27),
+                LocalDate.of(2025, 05, 30),
+                user02,
+                employee01
+        );
+
+        brandRepository.save(brand01);
+        brandRepository.save(brand02);
+        brandRepository.save(brand03);
+        productRepository.save(product01);
+        productRepository.save(product02);
+        productRepository.save(product03);
+        productRepository.save(product04);
+        employeeReposiroty.save(employee01);
+        employeeReposiroty.save(employee02);
+        userRepository.save(user01);
+        userRepository.save(user02);
+        orderRepository.save(order01);
     }
 }
