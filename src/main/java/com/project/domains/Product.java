@@ -1,6 +1,7 @@
-package domains.enums;
+package com.project.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.domains.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -15,27 +16,24 @@ import java.util.Objects;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_product")
     private Long idProduct;
 
-    @NotNull
     @NotBlank
+    @NotNull
     private String description;
 
-    @NotNull
     @NotBlank
+    @NotNull
     private String model;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate manufacturingDate;
 
-    @NotNull
-    @Digits(integer = 15, fraction = 3)
+    @Digits(integer = 15, fraction = 2)
     private BigDecimal value;
 
-    @NotNull
-    @Column(nullable = false)
-    private Integer availableQuantity;
+    private int availableQuantity;
 
     @ManyToOne
     @JoinColumn(name = "idbrand")
@@ -49,7 +47,7 @@ public class Product {
         this.status = Status.ACTIVATED;
     }
 
-    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal value, Integer availableQuantity, Brand brand, Status status) {
+    public Product(Long idProduct, String description, String model, LocalDate manufacturingDate, BigDecimal value, int availableQuantity, Brand brand, Status status) {
         this.idProduct = idProduct;
         this.description = description;
         this.model = model;
@@ -100,12 +98,20 @@ public class Product {
         this.value = value;
     }
 
-    public Integer getAvailableQuantity() {
+    public int getAvailableQuantity() {
         return availableQuantity;
     }
 
-    public void setAvailableQuantity(Integer availableQuantity) {
+    public void setAvailableQuantity(int availableQuantity) {
         this.availableQuantity = availableQuantity;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public Status getStatus() {

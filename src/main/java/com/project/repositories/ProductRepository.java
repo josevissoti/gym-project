@@ -1,6 +1,6 @@
-package repositories;
+package com.project.repositories;
 
-import domains.enums.Product;
+import com.project.domains.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

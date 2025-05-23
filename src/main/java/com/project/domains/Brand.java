@@ -1,5 +1,6 @@
-package domains.enums;
+package com.project.domains;
 
+import com.project.domains.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,12 +12,12 @@ import java.util.Objects;
 public class Brand {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "brand_seq")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_brand")
+    private Integer idBrand;
 
     @NotNull
     @NotBlank
-    private String name;
+    private String brandName;
 
     @NotNull
     @NotBlank
@@ -38,29 +39,29 @@ public class Brand {
         this.status = Status.ACTIVATED;
     }
 
-    public Brand(Integer id, String name, String cnpj, String originCountry, String email, Status status) {
-        this.id = id;
-        this.name = name;
+    public Brand(Integer idBrand, String brandName, String cnpj, String originCountry, String email, Status status) {
+        this.idBrand = idBrand;
+        this.brandName = brandName;
         this.cnpj = cnpj;
         this.originCountry = originCountry;
         this.email = email;
         this.status = status;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdBrand() {
+        return idBrand;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdBrand(Integer idBrand) {
+        this.idBrand = idBrand;
     }
 
-    public String getName() {
-        return name;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public String getCnpj() {
@@ -99,11 +100,11 @@ public class Brand {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Brand brand = (Brand) o;
-        return Objects.equals(id, brand.id) && Objects.equals(name, brand.name) && Objects.equals(cnpj, brand.cnpj) && Objects.equals(originCountry, brand.originCountry) && Objects.equals(email, brand.email);
+        return Objects.equals(idBrand, brand.idBrand) && Objects.equals(brandName, brand.brandName) && Objects.equals(email, brand.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, cnpj, originCountry, email);
+        return Objects.hash(idBrand, brandName, email);
     }
 }
