@@ -1,5 +1,6 @@
 package com.project.domains;
 
+import com.project.domains.dtos.BrandDTO;
 import com.project.domains.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -46,6 +47,15 @@ public class Brand {
         this.originCountry = originCountry;
         this.email = email;
         this.status = status;
+    }
+
+    public Brand(BrandDTO dto) {
+        this.idBrand = dto.getIdBrand();
+        this.brandName = dto.getBrandName();
+        this.cnpj = dto.getCnpj();
+        this.originCountry = dto.getOriginCountry();
+        this.email = dto.getEmail();
+        this.status = Status.toEnum(dto.getStatus());
     }
 
     public Integer getIdBrand() {

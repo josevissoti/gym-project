@@ -47,6 +47,8 @@ public class EmployeeDTO {
     @NotBlank(message = "Field password cannot be blank")
     protected String password;
 
+    private int status;
+
     protected Set<Integer> personType = new HashSet<>();
 
     public EmployeeDTO() {
@@ -62,6 +64,7 @@ public class EmployeeDTO {
         this.phone = employee.getPhone();
         this.email = employee.getEmail();
         this.password = employee.getPassword();
+        this.status = employee.getStatus().getIdStatus();
         this.personType.stream().map(PersonRole::toEnum).collect(Collectors.toSet());
     }
 
@@ -135,6 +138,14 @@ public class EmployeeDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Set<PersonRole> getPersonType() {

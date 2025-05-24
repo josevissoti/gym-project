@@ -1,5 +1,6 @@
 package com.project.domains;
 
+import com.project.domains.dtos.GymOrderDTO;
 import com.project.services.strategy.orderfreight.Freight;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

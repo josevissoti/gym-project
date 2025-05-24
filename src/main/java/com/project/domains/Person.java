@@ -2,6 +2,7 @@ package com.project.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.enums.PersonRole;
+import com.project.domains.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -54,6 +55,10 @@ public abstract class Person {
     @NotNull
     protected String password;
 
+    @Enumerated(EnumType.ORDINAL)
+    @JoinColumn(name = "status")
+    protected Status status;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "profiles", joinColumns = @JoinColumn(name = "person_id"))
     @Column(name = "person_type")
@@ -63,7 +68,7 @@ public abstract class Person {
         addPersonRole(PersonRole.USER);
     }
 
-    public Person(Long idPerson, String name, String cpf, String rg, LocalDate birthDate, LocalDate createDate, String phone, String email, String password) {
+    public Person(Long idPerson, String name, String cpf, String rg, LocalDate birthDate, LocalDate createDate, String phone, String email, String password, Status status) {
         this.idPerson = idPerson;
         this.name = name;
         this.cpf = cpf;
@@ -73,6 +78,7 @@ public abstract class Person {
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.status = status;
         addPersonRole(PersonRole.USER);
     }
 
@@ -146,6 +152,14 @@ public abstract class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Set<PersonRole> getPersonRole() {

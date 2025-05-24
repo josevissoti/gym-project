@@ -128,7 +128,8 @@ public class DBService {
                 LocalDate.now(),
                 "048995142578",
                 "luissilva@email.com",
-                "LuisSilva123"
+                "LuisSilva123",
+                Status.ACTIVATED
         );
 
         Employee employee02 = new Employee(
@@ -140,7 +141,8 @@ public class DBService {
                 LocalDate.now(),
                 "25485142684",
                 "anaclara@email.com",
-                "AnaClara123"
+                "AnaClara123",
+                Status.ACTIVATED
         );
 
         User user01 = new User(
@@ -152,7 +154,8 @@ public class DBService {
                 LocalDate.now(),
                 "85442695517",
                 "sebastiao@email.com",
-                "Sebastiao123"
+                "Sebastiao123",
+                Status.ACTIVATED
         );
 
         User user02 = new User(
@@ -164,7 +167,8 @@ public class DBService {
                 LocalDate.now(),
                 "17885695233",
                 "emilly@email.com",
-                "Emilly123"
+                "Emilly123",
+                Status.ACTIVATED
         );
 
         ServiceOrder gymOrder01 = new GymOrder(
