@@ -1,4 +1,4 @@
-package com.project.academy;
+package com.project.gym;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"com.project.domains", "com.project.domains.enums"})
 @EnableJpaRepositories(basePackages = "com.project.repositories")
 @SpringBootApplication
-public class AcademyApplication {
+public class GymApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AcademyApplication.class, args);
+        SpringApplication.run(GymApplication.class, args);
     }
 
 }

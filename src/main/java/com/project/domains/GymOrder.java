@@ -9,14 +9,14 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "academyOrder")
-public class AcademyOrder extends ServiceOrder {
+public class GymOrder extends ServiceOrder {
 
-    public AcademyOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
+    public GymOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
         super(idServiceOrder, startDate, endDate, deadline, user, employee, freight);
         super.setDescription("Academy Order");
     }
 
-    public AcademyOrder() {
+    public GymOrder() {
         super.setDescription("Academy Order");
     }
 

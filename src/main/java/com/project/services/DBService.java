@@ -22,7 +22,7 @@ public class DBService {
     private ProductRepository productRepository;
 
     @Autowired
-    private AcademyProductRepository academyProductRepository;
+    private GymProductRepository gymProductRepository;
 
     @Autowired
     private SportProductRepository sportProductRepository;
@@ -37,7 +37,7 @@ public class DBService {
     private ServiceOrderRepository serviceOrderRepository;
 
     @Autowired
-    private AcademyOrderRepository academyOrderRepository;
+    private GymOrderRepository gymOrderRepository;
 
     @Autowired
     private SportOrderRepository sportOrderRepository;
@@ -97,7 +97,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        Product academyProduct01 = new AcademyProduct(
+        Product gymProduct01 = new GymProduct(
                 null,
                 "Galaxy S23 Smartphone",
                 "GALAXY-S23",
@@ -108,7 +108,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        Product academyProduct02 = new AcademyProduct(
+        Product gymProduct02 = new GymProduct(
                 null,
                 "T-shirt Sportswear",
                 "TSHIRT-SPORT",
@@ -167,7 +167,7 @@ public class DBService {
                 "Emilly123"
         );
 
-        ServiceOrder academyOrder01 = new AcademyOrder(
+        ServiceOrder gymOrder01 = new GymOrder(
                 null,
                 LocalDate.now(),
                 LocalDate.of(2025, Month.MAY, 27),
@@ -189,8 +189,8 @@ public class DBService {
 
         OrderItem orderItem01 = new OrderItem(
                 null,
-                academyOrder01,
-                academyProduct02,
+                gymOrder01,
+                gymProduct02,
                 5
         );
 
@@ -205,15 +205,15 @@ public class DBService {
         brandRepository.save(brand01);
         brandRepository.save(brand02);
         brandRepository.save(brand03);
-        productRepository.save(academyProduct01);
-        productRepository.save(academyProduct02);
+        productRepository.save(gymProduct01);
+        productRepository.save(gymProduct02);
         productRepository.save(sportProduct01);
         productRepository.save(sportProduct02);
         employeeRepository.save(employee01);
         employeeRepository.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
-        serviceOrderRepository.save(academyOrder01);
+        serviceOrderRepository.save(gymOrder01);
         serviceOrderRepository.save(sportOrder01);
         orderItemRepository.save(orderItem01);
         orderItemRepository.save(orderItem02);
