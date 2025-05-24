@@ -11,8 +11,8 @@ import java.util.UUID;
 @Table(name = "academyOrder")
 public class GymOrder extends ServiceOrder {
 
-    public GymOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
-        super(idServiceOrder, startDate, endDate, deadline, user, employee, freight);
+    public GymOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, Freight freight) {
+        super(idServiceOrder, deadline, user, employee, freight);
         super.setDescription("Academy Order");
     }
 

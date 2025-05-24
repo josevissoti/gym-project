@@ -169,8 +169,6 @@ public class DBService {
 
         ServiceOrder gymOrder01 = new GymOrder(
                 null,
-                LocalDate.now(),
-                LocalDate.of(2025, Month.MAY, 27),
                 LocalDate.of(2025, Month.MAY, 30),
                 user02,
                 employee01,
@@ -179,8 +177,6 @@ public class DBService {
 
         ServiceOrder sportOrder01 = new SportOrder(
                 null,
-                LocalDate.now(),
-                LocalDate.of(2025, Month.JUNE, 5),
                 LocalDate.of(2025, Month.JUNE, 10),
                 user01,
                 employee02,

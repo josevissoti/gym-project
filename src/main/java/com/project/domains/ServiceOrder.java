@@ -49,19 +49,21 @@ public abstract class ServiceOrder {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Transient
+    private Freight freight;
+
+    @Transient
     private State currentState;
 
     public ServiceOrder() {
         this.currentState = new AwaitingPaymentState(this);
     }
 
-    public ServiceOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
+    public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, Freight freight) {
         this.idServiceOrder = idServiceOrder;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
+        this.freight = freight;
 
         this.currentState = new AwaitingPaymentState(this);
     }
@@ -152,6 +154,14 @@ public abstract class ServiceOrder {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public Freight getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Freight freight) {
+        this.freight = freight;
     }
 
     public State getCurrentState() {

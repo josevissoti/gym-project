@@ -10,8 +10,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "sportOrder")
 public class SportOrder extends ServiceOrder {
-    public SportOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
-        super(idServiceOrder, startDate, endDate, deadline, user, employee, freight);
+    public SportOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, Freight freight) {
+        super(idServiceOrder, deadline, user, employee, freight);
         super.setDescription("Sport Order");
     }
 
