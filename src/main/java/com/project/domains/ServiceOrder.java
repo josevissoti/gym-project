@@ -1,6 +1,8 @@
 package com.project.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.services.state.orderstate.AwaitingPaymentState;
+import com.project.services.state.orderstate.State;
 import com.project.services.strategy.orderfreight.Freight;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -46,7 +48,11 @@ public abstract class ServiceOrder {
     @OneToMany(mappedBy = "serviceOrder")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @Transient
+    private State currentState;
+
     public ServiceOrder() {
+        this.currentState = new AwaitingPaymentState(this);
     }
 
     public ServiceOrder(UUID idServiceOrder, LocalDate startDate, LocalDate endDate, LocalDate deadline, User user, Employee employee, Freight freight) {
@@ -56,6 +62,32 @@ public abstract class ServiceOrder {
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
+
+        this.currentState = new AwaitingPaymentState(this);
+    }
+
+    public void successInPaying() {
+        try {
+            this.currentState.successInPaying();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public void dispatchOrder() {
+        try {
+            this.currentState.cancelOrder();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public void cancelOrder() {
+        try {
+            this.currentState.dispatchOrder();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     public UUID getIdServiceOrder() {
@@ -120,6 +152,14 @@ public abstract class ServiceOrder {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
     }
 
     @Override
