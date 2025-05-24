@@ -19,6 +19,9 @@ public class DBService {
     private BrandRepository brandRepository;
 
     @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
     private AcademyProductRepository academyProductRepository;
 
     @Autowired
@@ -31,10 +34,16 @@ public class DBService {
     private UserRepository userRepository;
 
     @Autowired
+    private ServiceOrderRepository serviceOrderRepository;
+
+    @Autowired
     private AcademyOrderRepository academyOrderRepository;
 
     @Autowired
     private SportOrderRepository sportOrderRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     public void initDB() {
         // Create brands
@@ -66,7 +75,7 @@ public class DBService {
         );
 
         // Create products
-        SportProduct sportProduct01 = new SportProduct(
+        Product sportProduct01 = new SportProduct(
                 null,
                 "Air Max Running Shoes",
                 "AIRMAX-2023",
@@ -77,7 +86,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        SportProduct sportProduct02 = new SportProduct(
+        Product sportProduct02 = new SportProduct(
                 null,
                 "Ultraboost Shoes",
                 "ULTRABOOST-22",
@@ -88,7 +97,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        AcademyProduct academyProduct01 = new AcademyProduct(
+        Product academyProduct01 = new AcademyProduct(
                 null,
                 "Galaxy S23 Smartphone",
                 "GALAXY-S23",
@@ -99,7 +108,7 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        AcademyProduct academyProduct02 = new AcademyProduct(
+        Product academyProduct02 = new AcademyProduct(
                 null,
                 "T-shirt Sportswear",
                 "TSHIRT-SPORT",
@@ -158,7 +167,7 @@ public class DBService {
                 "Emilly123"
         );
 
-        AcademyOrder academyOrder01 = new AcademyOrder(
+        ServiceOrder academyOrder01 = new AcademyOrder(
                 null,
                 LocalDate.now(),
                 LocalDate.of(2025, Month.MAY, 27),
@@ -168,7 +177,7 @@ public class DBService {
                 new AirFreight()
         );
 
-        SportOrder sportOrder01 = new SportOrder(
+        ServiceOrder sportOrder01 = new SportOrder(
                 null,
                 LocalDate.now(),
                 LocalDate.of(2025, Month.JUNE, 5),
@@ -178,18 +187,35 @@ public class DBService {
                 new LandFreight()
         );
 
+        OrderItem orderItem01 = new OrderItem(
+                null,
+                academyOrder01,
+                academyProduct02,
+                5
+        );
+
+        OrderItem orderItem02 = new OrderItem(
+                null,
+                sportOrder01,
+                sportProduct01,
+                3
+        );
+
+
         brandRepository.save(brand01);
         brandRepository.save(brand02);
         brandRepository.save(brand03);
-        academyProductRepository.save(academyProduct01);
-        academyProductRepository.save(academyProduct02);
-        sportProductRepository.save(sportProduct01);
-        sportProductRepository.save(sportProduct02);
+        productRepository.save(academyProduct01);
+        productRepository.save(academyProduct02);
+        productRepository.save(sportProduct01);
+        productRepository.save(sportProduct02);
         employeeRepository.save(employee01);
         employeeRepository.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
-        academyOrderRepository.save(academyOrder01);
-        sportOrderRepository.save(sportOrder01);
+        serviceOrderRepository.save(academyOrder01);
+        serviceOrderRepository.save(sportOrder01);
+        orderItemRepository.save(orderItem01);
+        orderItemRepository.save(orderItem02);
     }
 }
