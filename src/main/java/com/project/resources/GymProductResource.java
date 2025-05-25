@@ -1,10 +1,12 @@
 package com.project.resources;
 
+import com.project.domains.GymProduct;
 import com.project.domains.dtos.GymProductDTO;
 import com.project.services.GymProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,18 @@ public class GymProductResource {
     @GetMapping
     public ResponseEntity<List<GymProductDTO>> findAll() {
         return ResponseEntity.ok().body(gymProductService.findAll());
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GymProductDTO> findById(@PathVariable Long id) {
+        GymProduct obj = this.gymProductService.findById(id);
+        return ResponseEntity.ok().body(new GymProductDTO(obj));
+    }
+
+    @GetMapping(value = "/description/{description}")
+    public ResponseEntity<GymProductDTO> findByDescription(@PathVariable String description) {
+        GymProduct obj = this.gymProductService.findByDescription(description);
+        return ResponseEntity.ok().body(new GymProductDTO(obj));
     }
 
 }

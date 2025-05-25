@@ -1,8 +1,10 @@
 package com.project.services;
 
+import com.project.domains.GymProduct;
 import com.project.domains.SportProduct;
 import com.project.domains.dtos.SportProductDTO;
 import com.project.repositories.SportProductRepository;
+import com.project.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,12 @@ public class SportProductService {
 
     public SportProduct findById(Long id) {
         Optional<SportProduct> obj = sportProductRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Sport Product not found. ID: " + id));
+    }
+
+    public SportProduct findByDescription(String description) {
+        Optional<SportProduct> obj = sportProductRepository.findByDescription(description);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Sport Product not found. Description: " + description));
     }
 
 }

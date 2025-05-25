@@ -3,6 +3,7 @@ package com.project.services;
 import com.project.domains.User;
 import com.project.domains.dtos.UserDTO;
 import com.project.repositories.UserRepository;
+import com.project.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,17 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = userRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("User not found. ID: " + id));
+    }
+
+    public User findByCpf(String cpf) {
+        Optional<User> obj = userRepository.findByCpf(cpf);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("User not found. CPF: " + cpf));
+    }
+
+    public User findByEmail(String email) {
+        Optional<User> obj = userRepository.findByEmail(email);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("User not found. Email: " + email));
     }
 
 }
