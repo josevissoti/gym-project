@@ -54,8 +54,6 @@ public class GymOrderDTO {
         this.nameEmployee = gymOrder.getEmployee().getName();
         this.user = gymOrder.getUser().getIdPerson();
         this.nameUser = gymOrder.getUser().getName();
-        this.state = gymOrder.getCurrentState();
-        this.freight = gymOrder.getFreight();
     }
 
     public UUID getIdServiceOrder() {
