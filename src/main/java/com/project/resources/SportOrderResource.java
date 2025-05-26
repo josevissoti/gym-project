@@ -1,8 +1,6 @@
 package com.project.resources;
 
-import com.project.domains.GymOrder;
 import com.project.domains.SportOrder;
-import com.project.domains.dtos.GymOrderDTO;
 import com.project.domains.dtos.SportOrderDTO;
 import com.project.services.SportOrderService;
 import jakarta.validation.Valid;
@@ -29,7 +27,7 @@ public class SportOrderResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<SportOrderDTO> findById(@PathVariable UUID id) {
-        GymOrder obj = this.sportOrderService.findById(id);
+        SportOrder obj = this.sportOrderService.findById(id);
         return ResponseEntity.ok().body(new SportOrderDTO(obj));
     }
 
@@ -43,7 +41,7 @@ public class SportOrderResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<SportOrderDTO> update(@PathVariable UUID id, @Valid @RequestBody SportOrderDTO objDto) {
-        SportOrderDTO obj = sportOrderService.update(id, objDto);
+        SportOrder obj = sportOrderService.update(id, objDto);
         return ResponseEntity.ok().body(new SportOrderDTO(obj));
     }
 

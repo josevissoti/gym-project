@@ -171,35 +171,6 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-        ServiceOrder gymOrder01 = new GymOrder(
-                null,
-                LocalDate.of(2025, Month.MAY, 30),
-                user02,
-                employee01,
-                new AirFreight()
-        );
-
-        ServiceOrder sportOrder01 = new SportOrder(
-                null,
-                LocalDate.of(2025, Month.JUNE, 10),
-                user01,
-                employee02,
-                new LandFreight()
-        );
-
-        OrderItem orderItem01 = new OrderItem(
-                null,
-                gymOrder01,
-                gymProduct02,
-                5
-        );
-
-        OrderItem orderItem02 = new OrderItem(
-                null,
-                sportOrder01,
-                sportProduct01,
-                3
-        );
 
 
         brandRepository.save(brand01);
@@ -213,9 +184,6 @@ public class DBService {
         employeeRepository.save(employee02);
         userRepository.save(user01);
         userRepository.save(user02);
-        serviceOrderRepository.save(gymOrder01);
-        serviceOrderRepository.save(sportOrder01);
-        orderItemRepository.save(orderItem01);
-        orderItemRepository.save(orderItem02);
+
     }
 }

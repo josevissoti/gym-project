@@ -45,7 +45,7 @@ public abstract class ServiceOrder {
     @JoinColumn(name = "iduser")
     private Employee employee;
 
-    @OneToMany(mappedBy = "serviceOrder")
+    @OneToMany(mappedBy = "serviceOrder", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Transient
@@ -58,12 +58,12 @@ public abstract class ServiceOrder {
         this.currentState = new AwaitingPaymentState(this);
     }
 
-    public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, Freight freight) {
+    public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, List<OrderItem> orderItems) {
         this.idServiceOrder = idServiceOrder;
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
-        this.freight = freight;
+        this.orderItems = new ArrayList<>();
 
         this.currentState = new AwaitingPaymentState(this);
     }
@@ -152,8 +152,9 @@ public abstract class ServiceOrder {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+    public void addOrderItems(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setServiceOrder(this);
     }
 
     public Freight getFreight() {
@@ -182,9 +183,5 @@ public abstract class ServiceOrder {
     @Override
     public int hashCode() {
         return Objects.hash(idServiceOrder, description);
-    }
-
-    public void addOrderItem(Product product, int quantity) {
-
     }
 }

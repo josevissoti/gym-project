@@ -1,12 +1,11 @@
 package com.project.services;
 
-import com.project.domains.Employee;
-import com.project.domains.GymOrder;
-import com.project.domains.SportOrder;
-import com.project.domains.User;
+import com.project.domains.*;
 import com.project.domains.dtos.GymOrderDTO;
+import com.project.domains.dtos.OrderItemDTO;
 import com.project.domains.dtos.SportOrderDTO;
 import com.project.repositories.SportOrderRepository;
+import com.project.repositories.SportProductRepository;
 import com.project.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,9 @@ public class SportOrderService {
 
     @Autowired
     private SportOrderRepository sportOrderRepository;
+
+    @Autowired
+    private SportProductRepository sportProductRepository;
 
     @Autowired
     private EmployeeService employeeService;
@@ -45,17 +47,29 @@ public class SportOrderService {
         User user = userService.findById(obj.getUser());
 
         SportOrder sportOrder = new SportOrder();
+
         if (obj.getIdServiceOrder() != null) {
             sportOrder.setIdServiceOrder(obj.getIdServiceOrder());
         }
 
-        if (obj.getIdServiceOrder().equals(2)) {
-            sportOrder.setEndDate(LocalDate.now());
-        }
-
+        sportOrder.setDeadline(obj.getDeadline());
         sportOrder.setEmployee(employee);
         sportOrder.setUser(user);
-        sportOrder.setDescription(obj.getDescription());
+        sportOrder.setDescription("Sport Order");
+
+        for (OrderItemDTO orderItemDTO : obj.getItems()) {
+            Product product = sportProductRepository.findById(orderItemDTO.getIdProduct())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            if (!(product instanceof SportProduct sportProduct)) {
+                throw new RuntimeException("Product must be a GymProduct. ID: " + orderItemDTO.getIdProduct());
+            }
+
+            OrderItem orderItem = new OrderItem(null, sportOrder, sportProduct, orderItemDTO.getQuantity());
+
+            sportOrder.addOrderItems(orderItem);
+        }
+
         return sportOrder;
     }
 

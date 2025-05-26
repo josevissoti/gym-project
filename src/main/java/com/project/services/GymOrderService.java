@@ -1,10 +1,10 @@
 package com.project.services;
 
-import com.project.domains.Employee;
-import com.project.domains.GymOrder;
-import com.project.domains.User;
+import com.project.domains.*;
 import com.project.domains.dtos.GymOrderDTO;
+import com.project.domains.dtos.OrderItemDTO;
 import com.project.repositories.GymOrderRepository;
+import com.project.repositories.GymProductRepository;
 import com.project.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,9 @@ public class GymOrderService {
 
     @Autowired
     private GymOrderRepository gymOrderRepository;
+
+    @Autowired
+    private GymProductRepository gymProductRepository;
 
     @Autowired
     private EmployeeService employeeService;
@@ -43,17 +46,29 @@ public class GymOrderService {
         User user = userService.findById(obj.getUser());
 
         GymOrder gymOrder = new GymOrder();
+
         if (obj.getIdServiceOrder() != null) {
             gymOrder.setIdServiceOrder(obj.getIdServiceOrder());
         }
 
-        if (obj.getIdServiceOrder().equals(2)) {
-            gymOrder.setEndDate(LocalDate.now());
-        }
-
+        gymOrder.setDeadline(obj.getDeadline());
         gymOrder.setEmployee(employee);
         gymOrder.setUser(user);
-        gymOrder.setDescription(obj.getDescription());
+        gymOrder.setDescription("Gym Order");
+
+        for (OrderItemDTO orderItemDTO : obj.getItems()) {
+            Product product = gymProductRepository.findById(orderItemDTO.getIdProduct())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            if (!(product instanceof GymProduct gymProduct)) {
+                throw new RuntimeException("Product must be a GymProduct. ID: " + orderItemDTO.getIdProduct());
+            }
+
+            OrderItem orderItem = new OrderItem(null, gymOrder, gymProduct, orderItemDTO.getQuantity());
+
+            gymOrder.addOrderItems(orderItem);
+        }
+
         return gymOrder;
     }
 

@@ -4,18 +4,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.GymOrder;
 import com.project.services.state.orderstate.State;
 import com.project.services.strategy.orderfreight.Freight;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class GymOrderDTO {
 
     private UUID idServiceOrder;
 
-    @NotNull(message = "Field description cannot be null")
-    @NotBlank(message = "Field description cannot be blank")
     private String description;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -35,11 +34,7 @@ public class GymOrderDTO {
     private Long user;
     private String nameUser;
 
-    @NotNull(message = "Field State cannot be null")
-    private State state;
-
-    @NotNull(message = "Field Freight cannot be null")
-    private Freight freight;
+    private List<OrderItemDTO> items;
 
     public GymOrderDTO() {
     }
@@ -54,6 +49,9 @@ public class GymOrderDTO {
         this.nameEmployee = gymOrder.getEmployee().getName();
         this.user = gymOrder.getUser().getIdPerson();
         this.nameUser = gymOrder.getUser().getName();
+        this.items = gymOrder.getOrderItems().stream()
+                .map(OrderItemDTO::new)
+                .collect(Collectors.toList());
     }
 
     public UUID getIdServiceOrder() {
@@ -96,6 +94,14 @@ public class GymOrderDTO {
         this.deadline = deadline;
     }
 
+    public List<OrderItemDTO> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItemDTO> items) {
+        this.items = items;
+    }
+
     public Long getEmployee() {
         return employee;
     }
@@ -128,19 +134,4 @@ public class GymOrderDTO {
         this.nameUser = nameUser;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public Freight getFreight() {
-        return freight;
-    }
-
-    public void setFreight(Freight freight) {
-        this.freight = freight;
-    }
 }

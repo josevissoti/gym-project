@@ -5,13 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "sportOrder")
 public class SportOrder extends ServiceOrder {
-    public SportOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, Freight freight) {
-        super(idServiceOrder, deadline, user, employee, freight);
+    public SportOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, List<OrderItem> orderItems) {
+        super(idServiceOrder, deadline, user, employee, orderItems);
         super.setDescription("Sport Order");
     }
 
@@ -19,12 +20,4 @@ public class SportOrder extends ServiceOrder {
         super.setDescription("Sport Order");
     }
 
-    @Override
-    public void addOrderItem(Product product, int quantity) {
-        if (product instanceof Product) {
-            super.addOrderItem(product, quantity);
-        } else {
-            throw new IllegalArgumentException("Invalid Product");
-        }
-    }
 }
