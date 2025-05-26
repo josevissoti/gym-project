@@ -3,13 +3,13 @@ package com.project.resources;
 import com.project.domains.User;
 import com.project.domains.dtos.UserDTO;
 import com.project.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -40,6 +40,26 @@ public class UserResource {
     public ResponseEntity<UserDTO> findByEmail(@PathVariable String email) {
         User obj = this.userService.findByEmail(email);
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> create(@Valid @RequestBody UserDTO dto) {
+        User user = userService.create(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(user.getIdPerson()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO objDto) {
+        User Obj = userService.update(id, objDto);
+        return ResponseEntity.ok().body(new UserDTO(Obj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

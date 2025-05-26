@@ -3,13 +3,13 @@ package com.project.resources;
 import com.project.domains.GymProduct;
 import com.project.domains.dtos.GymProductDTO;
 import com.project.services.GymProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,10 +30,24 @@ public class GymProductResource {
         return ResponseEntity.ok().body(new GymProductDTO(obj));
     }
 
-    @GetMapping(value = "/description/{description}")
-    public ResponseEntity<GymProductDTO> findByDescription(@PathVariable String description) {
-        GymProduct obj = this.gymProductService.findByDescription(description);
-        return ResponseEntity.ok().body(new GymProductDTO(obj));
+    @PostMapping
+    public ResponseEntity<GymProductDTO> create(@Valid @RequestBody GymProductDTO dto) {
+        GymProduct gymProduct = gymProductService.create(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(gymProduct.getIdProduct()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<GymProductDTO> update(@PathVariable Long id, @Valid @RequestBody GymProductDTO objDto) {
+        GymProduct Obj = gymProductService.update(id, objDto);
+        return ResponseEntity.ok().body(new GymProductDTO(Obj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<GymProductDTO> delete(@PathVariable Long id) {
+        gymProductService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -3,13 +3,13 @@ package com.project.resources;
 import com.project.domains.Employee;
 import com.project.domains.dtos.EmployeeDTO;
 import com.project.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -40,6 +40,26 @@ public class EmployeeResource {
     public ResponseEntity<EmployeeDTO> findByEmail(@PathVariable String email) {
         Employee obj = this.employeeService.findByEmail(email);
         return ResponseEntity.ok().body(new EmployeeDTO(obj));
+    }
+
+    @PostMapping
+    public ResponseEntity<EmployeeDTO> create(@Valid @RequestBody EmployeeDTO dto) {
+        Employee employee = employeeService.create(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(employee.getIdPerson()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<EmployeeDTO> update(@PathVariable Long id, @Valid @RequestBody EmployeeDTO objDto) {
+        Employee Obj = employeeService.update(id, objDto);
+        return ResponseEntity.ok().body(new EmployeeDTO(Obj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<EmployeeDTO> delete(@PathVariable Long id) {
+        employeeService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -21,34 +21,34 @@ public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_product")
     @SequenceGenerator(name = "seq_product", sequenceName = "seq_product", allocationSize = 1)
-    private Long idProduct;
+    protected Long idProduct;
 
     @NotBlank
     @NotNull
-    private String description;
+    protected String description;
 
     @NotBlank
     @NotNull
-    private String model;
+    protected String model;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate manufacturingDate;
+    protected LocalDate manufacturingDate;
 
     @Digits(integer = 15, fraction = 2)
-    private BigDecimal productValue;
+    protected BigDecimal productValue;
 
-    private int availableQuantity;
+    protected int availableQuantity;
 
     @ManyToOne
     @JoinColumn(name = "idbrand")
-    private Brand brand;
+    protected Brand brand;
 
     @Enumerated(EnumType.ORDINAL)
     @JoinColumn(name = "status")
-    private Status status;
+    protected Status status;
 
     @OneToMany(mappedBy = "product")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    protected List<OrderItem> orderItems = new ArrayList<>();
 
     public Product() {
         this.status = Status.ACTIVATED;

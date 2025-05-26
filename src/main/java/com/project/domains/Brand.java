@@ -1,11 +1,14 @@
 package com.project.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.domains.dtos.BrandDTO;
 import com.project.domains.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,6 +38,10 @@ public class Brand {
     @Enumerated(EnumType.ORDINAL)
     @JoinColumn(name = "status")
     private Status status;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "brand")
+    private List<Product> products = new ArrayList<>();
 
     public Brand() {
         this.status = Status.ACTIVATED;
@@ -104,6 +111,14 @@ public class Brand {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

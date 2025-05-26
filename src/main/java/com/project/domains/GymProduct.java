@@ -1,5 +1,6 @@
 package com.project.domains;
 
+import com.project.domains.dtos.GymProductDTO;
 import com.project.domains.enums.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -16,4 +17,16 @@ public class GymProduct extends Product {
 
     public GymProduct() {
     }
+
+    public GymProduct(GymProductDTO dto) {
+        this.idProduct = dto.getIdProduct();
+        this.description = dto.getDescription();
+        this.model = dto.getModel();
+        this.manufacturingDate = dto.getManufacturingDate();
+        this.productValue = dto.getProductValue();
+        this.availableQuantity = dto.getAvailableQuantity();
+        this.brand = new Brand();
+        this.brand.setIdBrand(dto.getBrand());
+    }
+
 }

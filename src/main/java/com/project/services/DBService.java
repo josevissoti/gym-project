@@ -50,7 +50,7 @@ public class DBService {
         Brand brand01 = new Brand(
                 null,
                 "Nike",
-                "12.345.678/0001-90",
+                "12345678000190",
                 "United States",
                 "contact@nike.com",
                 Status.ACTIVATED
@@ -59,7 +59,7 @@ public class DBService {
         Brand brand02 = new Brand(
                 null,
                 "Adidas",
-                "98.765.432/0001-21",
+                "98765432000121",
                 "Germany",
                 "contact@adidas.com",
                 Status.ACTIVATED
@@ -68,7 +68,7 @@ public class DBService {
         Brand brand03 = new Brand(
                 null,
                 "Samsung",
-                "11.223.344/0001-55",
+                "11223344000155",
                 "South Korea",
                 "contact@samsung.com",
                 Status.ACTIVATED

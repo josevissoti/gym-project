@@ -38,6 +38,7 @@ public class User extends Person {
         this.rg = dto.getRg();
         this.birthDate = dto.getBirthDate();
         this.createDate = dto.getCreateDate();
+        this.phone = dto.getPhone();
         this.email = dto.getEmail();
         this.password = dto.getPassword();
         this.status = Status.toEnum(dto.getStatus());

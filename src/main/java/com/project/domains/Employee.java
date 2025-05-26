@@ -23,13 +23,11 @@ public class Employee extends Person {
 
     public Employee() {
         super();
-        addPersonRole(PersonRole.USER);
         addPersonRole(PersonRole.EMPLOYEE);
     }
 
     public Employee(Long idPerson, String name, String cpf, String rg, LocalDate birthDate, LocalDate createDate, String phone, String email, String password, Status status) {
         super(idPerson, name, cpf, rg, birthDate, createDate, phone, email, password, status);
-        addPersonRole(PersonRole.USER);
         addPersonRole(PersonRole.EMPLOYEE);
     }
 
@@ -40,6 +38,7 @@ public class Employee extends Person {
         this.rg = dto.getRg();
         this.birthDate = dto.getBirthDate();
         this.createDate = dto.getCreateDate();
+        this.phone = dto.getPhone();
         this.email = dto.getEmail();
         this.password = dto.getPassword();
         this.status = Status.toEnum(dto.getStatus());
