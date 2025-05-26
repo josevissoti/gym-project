@@ -52,8 +52,8 @@ public class EmployeeResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EmployeeDTO> update(@PathVariable Long id, @Valid @RequestBody EmployeeDTO objDto) {
-        Employee Obj = employeeService.update(id, objDto);
-        return ResponseEntity.ok().body(new EmployeeDTO(Obj));
+        Employee obj = employeeService.update(id, objDto);
+        return ResponseEntity.ok().body(new EmployeeDTO(obj));
     }
 
     @DeleteMapping(value = "/{id}")

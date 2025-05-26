@@ -46,8 +46,8 @@ public class BrandResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<BrandDTO> update(@PathVariable Integer id, @Valid @RequestBody BrandDTO objDto) {
-        Brand Obj = brandService.update(id, objDto);
-        return ResponseEntity.ok().body(new BrandDTO(Obj));
+        Brand obj = brandService.update(id, objDto);
+        return ResponseEntity.ok().body(new BrandDTO(obj));
     }
 
     @DeleteMapping(value = "/{id}")

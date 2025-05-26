@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "gymorder")
@@ -24,6 +25,12 @@ public class GymOrderResource {
         return ResponseEntity.ok().body(gymOrderService.findAll());
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GymOrderDTO> findById(@PathVariable UUID id) {
+        GymOrder obj = this.gymOrderService.findById(id);
+        return ResponseEntity.ok().body(new GymOrderDTO(obj));
+    }
+
     @PostMapping
     public ResponseEntity<GymOrderDTO> create(@Valid @RequestBody GymOrderDTO dto) {
         GymOrder gymOrder = gymOrderService.create(dto);
@@ -33,9 +40,9 @@ public class GymOrderResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<GymOrderDTO> update(@PathVariable Long id, @Valid @RequestBody GymOrderDTO objDto) {
-        GymOrder Obj = gymOrderService.update(id, objDto);
-        return ResponseEntity.ok().body(new GymOrderDTO(Obj));
+    public ResponseEntity<GymOrderDTO> update(@PathVariable UUID id, @Valid @RequestBody GymOrderDTO objDto) {
+        GymOrder obj = gymOrderService.update(id, objDto);
+        return ResponseEntity.ok().body(new GymOrderDTO(obj));
     }
 
 }

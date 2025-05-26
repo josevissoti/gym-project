@@ -40,8 +40,8 @@ public class SportProductResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<SportProductDTO> update(@PathVariable Long id, @Valid @RequestBody SportProductDTO objDto) {
-        SportProduct Obj = sportProductService.update(id, objDto);
-        return ResponseEntity.ok().body(new SportProductDTO(Obj));
+        SportProduct obj = sportProductService.update(id, objDto);
+        return ResponseEntity.ok().body(new SportProductDTO(obj));
     }
 
     @DeleteMapping(value = "/{id}")
