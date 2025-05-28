@@ -91,7 +91,7 @@ public class DBService {
                 "Ultraboost Shoes",
                 "ULTRABOOST-22",
                 LocalDate.of(2023, Month.DECEMBER, 23),
-                new BigDecimal("799.99"),
+                new BigDecimal("800.00"),
                 80,
                 brand02,
                 Status.ACTIVATED
@@ -102,7 +102,7 @@ public class DBService {
                 "Galaxy S23 Smartphone",
                 "GALAXY-S23",
                 LocalDate.of(2025, Month.JANUARY, 4),
-                new BigDecimal("4599.00"),
+                new BigDecimal("4599.99"),
                 200,
                 brand03,
                 Status.ACTIVATED
@@ -113,7 +113,7 @@ public class DBService {
                 "T-shirt Sportswear",
                 "TSHIRT-SPORT",
                 LocalDate.of(2024, Month.SEPTEMBER, 1),
-                new BigDecimal("129.90"),
+                new BigDecimal("130.00"),
                 350,
                 brand01,
                 Status.ACTIVATED

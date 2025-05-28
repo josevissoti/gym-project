@@ -1,16 +1,15 @@
 package com.project.services;
 
 import com.project.domains.*;
-import com.project.domains.dtos.GymOrderDTO;
 import com.project.domains.dtos.OrderItemDTO;
 import com.project.domains.dtos.SportOrderDTO;
 import com.project.repositories.SportOrderRepository;
 import com.project.repositories.SportProductRepository;
 import com.project.services.exceptions.ObjectNotFoundException;
+import com.project.services.strategy.orderfreight.FreightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,6 +29,9 @@ public class SportOrderService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FreightService freightService;
 
     public List<SportOrderDTO> findAll() {
         return sportOrderRepository.findAll().stream()
@@ -56,6 +58,7 @@ public class SportOrderService {
         sportOrder.setEmployee(employee);
         sportOrder.setUser(user);
         sportOrder.setDescription("Sport Order");
+        sportOrder.setFreightType(obj.getFreightType());
 
         for (OrderItemDTO orderItemDTO : obj.getItems()) {
             Product product = sportProductRepository.findById(orderItemDTO.getIdProduct())
@@ -69,6 +72,9 @@ public class SportOrderService {
 
             sportOrder.addOrderItems(orderItem);
         }
+
+        freightService.setMapFreight(sportOrder);
+        sportOrder.calculateFreight();
 
         return sportOrder;
     }

@@ -5,9 +5,11 @@ import com.project.services.state.orderstate.AwaitingPaymentState;
 import com.project.services.state.orderstate.State;
 import com.project.services.strategy.orderfreight.Freight;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,13 @@ public abstract class ServiceOrder {
     @Transient
     private Freight freight;
 
+    @NotBlank
+    @NotNull
+    private String freightType;
+
+    @Digits(integer = 15, fraction = 6)
+    private BigDecimal freightValue;
+
     @Transient
     private State currentState;
 
@@ -58,14 +67,22 @@ public abstract class ServiceOrder {
         this.currentState = new AwaitingPaymentState(this);
     }
 
-    public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, List<OrderItem> orderItems) {
+    public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, String freightType) {
         this.idServiceOrder = idServiceOrder;
         this.deadline = deadline;
         this.user = user;
         this.employee = employee;
         this.orderItems = new ArrayList<>();
-
+        this.freightType = freightType;
         this.currentState = new AwaitingPaymentState(this);
+    }
+
+    public BigDecimal calculateFreight() {
+        if (this.freight == null) {
+            throw new IllegalStateException("Freight strategy not set");
+        }
+        this.freightValue = this.freight.freightCalcule(this.orderItems);
+        return this.freightValue;
     }
 
     public void successInPaying() {
@@ -157,12 +174,32 @@ public abstract class ServiceOrder {
         orderItem.setServiceOrder(this);
     }
 
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     public Freight getFreight() {
         return freight;
     }
 
     public void setFreight(Freight freight) {
         this.freight = freight;
+    }
+
+    public String getFreightType() {
+        return freightType;
+    }
+
+    public void setFreightType(String freightType) {
+        this.freightType = freightType;
+    }
+
+    public BigDecimal getFreightValue() {
+        return freightValue;
+    }
+
+    public void setFreightValue(BigDecimal freightValue) {
+        this.freightValue = freightValue;
     }
 
     public State getCurrentState() {

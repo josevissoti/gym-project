@@ -34,7 +34,7 @@ public abstract class Product {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate manufacturingDate;
 
-    @Digits(integer = 15, fraction = 2)
+    @Digits(integer = 15, fraction = 3)
     protected BigDecimal productValue;
 
     protected int availableQuantity;

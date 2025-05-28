@@ -2,10 +2,10 @@ package com.project.domains.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.GymOrder;
-import com.project.services.state.orderstate.State;
-import com.project.services.strategy.orderfreight.Freight;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +36,12 @@ public class GymOrderDTO {
 
     private List<OrderItemDTO> items;
 
+    @NotNull(message = "Field freightType cannot be null")
+    private String freightType;
+
+    @Digits(integer = 15, fraction = 3)
+    private BigDecimal freightValue;
+
     public GymOrderDTO() {
     }
 
@@ -52,6 +58,8 @@ public class GymOrderDTO {
         this.items = gymOrder.getOrderItems().stream()
                 .map(OrderItemDTO::new)
                 .collect(Collectors.toList());
+        this.freightType = gymOrder.getFreightType();
+        this.freightValue = gymOrder.getFreightValue();
     }
 
     public UUID getIdServiceOrder() {
@@ -134,4 +142,19 @@ public class GymOrderDTO {
         this.nameUser = nameUser;
     }
 
+    public String getFreightType() {
+        return freightType;
+    }
+
+    public void setFreightType(String freightType) {
+        this.freightType = freightType;
+    }
+
+    public BigDecimal getFreightValue() {
+        return freightValue;
+    }
+
+    public void setFreightValue(BigDecimal freightValue) {
+        this.freightValue = freightValue;
+    }
 }

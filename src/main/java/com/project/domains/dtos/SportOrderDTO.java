@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.SportOrder;
 import com.project.services.state.orderstate.State;
 import com.project.services.strategy.orderfreight.Freight;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -37,6 +39,12 @@ public class SportOrderDTO {
 
     private List<OrderItemDTO> items;
 
+    @NotNull(message = "Field freightType cannot be null")
+    private String freightType;
+
+    @Digits(integer = 15, fraction = 3)
+    private BigDecimal freightValue;
+
     public SportOrderDTO() {
     }
 
@@ -53,6 +61,8 @@ public class SportOrderDTO {
         this.items = sportOrder.getOrderItems().stream()
                 .map(OrderItemDTO::new)
                 .collect(Collectors.toList());
+        this.freightType = sportOrder.getFreightType();
+        this.freightValue = sportOrder.getFreightValue();
     }
 
     public UUID getIdServiceOrder() {
@@ -133,5 +143,21 @@ public class SportOrderDTO {
 
     public void setItems(List<OrderItemDTO> items) {
         this.items = items;
+    }
+
+    public String getFreightType() {
+        return freightType;
+    }
+
+    public void setFreightType(String freightType) {
+        this.freightType = freightType;
+    }
+
+    public BigDecimal getFreightValue() {
+        return freightValue;
+    }
+
+    public void setFreightValue(BigDecimal freightValue) {
+        this.freightValue = freightValue;
     }
 }

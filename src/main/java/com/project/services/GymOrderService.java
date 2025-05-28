@@ -6,10 +6,13 @@ import com.project.domains.dtos.OrderItemDTO;
 import com.project.repositories.GymOrderRepository;
 import com.project.repositories.GymProductRepository;
 import com.project.services.exceptions.ObjectNotFoundException;
+import com.project.services.strategy.orderfreight.Freight;
+import com.project.services.strategy.orderfreight.FreightService;
+import com.project.services.strategy.orderfreight.LandFreight;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,6 +32,9 @@ public class GymOrderService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FreightService freightService;
 
     public List<GymOrderDTO> findAll() {
         return gymOrderRepository.findAll().stream()
@@ -55,6 +61,7 @@ public class GymOrderService {
         gymOrder.setEmployee(employee);
         gymOrder.setUser(user);
         gymOrder.setDescription("Gym Order");
+        gymOrder.setFreightType(obj.getFreightType());
 
         for (OrderItemDTO orderItemDTO : obj.getItems()) {
             Product product = gymProductRepository.findById(orderItemDTO.getIdProduct())
@@ -68,6 +75,9 @@ public class GymOrderService {
 
             gymOrder.addOrderItems(orderItem);
         }
+
+        freightService.setMapFreight(gymOrder);
+        gymOrder.calculateFreight();
 
         return gymOrder;
     }
