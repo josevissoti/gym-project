@@ -2,7 +2,9 @@ package com.project.resources;
 
 import com.project.domains.GymOrder;
 import com.project.domains.dtos.GymOrderDTO;
+import com.project.repositories.GymOrderRepository;
 import com.project.services.GymOrderService;
+import com.project.services.state.orderstate.StateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,12 @@ public class GymOrderResource {
     @Autowired
     private GymOrderService gymOrderService;
 
+    @Autowired
+    private GymOrderRepository gymOrderRepository;
+
+    @Autowired
+    private StateService stateService;
+
     @GetMapping
     public ResponseEntity<List<GymOrderDTO>> findAll() {
         return ResponseEntity.ok().body(gymOrderService.findAll());
@@ -28,6 +36,33 @@ public class GymOrderResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<GymOrderDTO> findById(@PathVariable UUID id) {
         GymOrder obj = this.gymOrderService.findById(id);
+        return ResponseEntity.ok().body(new GymOrderDTO(obj));
+    }
+
+    @GetMapping(value = "/{id}/pay")
+    public ResponseEntity<GymOrderDTO> payOrder(@PathVariable UUID id) {
+        GymOrder obj = this.gymOrderService.findById(id);
+        obj.initializeState(stateService);
+        obj.successInPaying();
+        gymOrderRepository.save(obj);
+        return ResponseEntity.ok().body(new GymOrderDTO(obj));
+    }
+
+    @GetMapping(value = "/{id}/dispatch")
+    public ResponseEntity<GymOrderDTO> dispatchOrder(@PathVariable UUID id) {
+        GymOrder obj = this.gymOrderService.findById(id);
+        obj.initializeState(stateService);
+        obj.dispatchOrder();
+        gymOrderRepository.save(obj);
+        return ResponseEntity.ok().body(new GymOrderDTO(obj));
+    }
+
+    @GetMapping(value = "/{id}/cancel")
+    public ResponseEntity<GymOrderDTO> cancelOrder(@PathVariable UUID id) {
+        GymOrder obj = this.gymOrderService.findById(id);
+        obj.initializeState(stateService);
+        obj.cancelOrder();
+        gymOrderRepository.save(obj);
         return ResponseEntity.ok().body(new GymOrderDTO(obj));
     }
 

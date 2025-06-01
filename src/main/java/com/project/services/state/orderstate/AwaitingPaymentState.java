@@ -7,19 +7,18 @@ import java.util.logging.Logger;
 
 public class AwaitingPaymentState implements State {
 
-    private ServiceOrder serviceOrder;
-
-    public AwaitingPaymentState(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+    @Override
+    public String getType() {
+        return "Awaiting Payment";
     }
 
     @Override
-    public void successInPaying() {
-        this.serviceOrder.setCurrentState(new PaidState(serviceOrder));
+    public void successInPaying(ServiceOrder serviceOrder) {
+        serviceOrder.setState(new PaidState());
     }
 
     @Override
-    public void dispatchOrder() {
+    public void dispatchOrder(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service Order not Paid");
         } catch (Exception e) {
@@ -28,7 +27,7 @@ public class AwaitingPaymentState implements State {
     }
 
     @Override
-    public void cancelOrder() {
-        this.serviceOrder.setCurrentState(new CanceledState(serviceOrder));
+    public void cancelOrder(ServiceOrder serviceOrder) {
+        serviceOrder.setState(new CanceledState());
     }
 }

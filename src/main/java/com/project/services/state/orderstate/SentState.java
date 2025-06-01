@@ -7,14 +7,13 @@ import java.util.logging.Logger;
 
 public class SentState implements State {
 
-    private ServiceOrder serviceOrder;
-
-    public SentState(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+    @Override
+    public String getType() {
+        return "Sent";
     }
 
     @Override
-    public void successInPaying() {
+    public void successInPaying(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service already Sent");
         } catch (Exception e) {
@@ -23,7 +22,7 @@ public class SentState implements State {
     }
 
     @Override
-    public void dispatchOrder() {
+    public void dispatchOrder(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service already Sent");
         } catch (Exception e) {
@@ -32,7 +31,7 @@ public class SentState implements State {
     }
 
     @Override
-    public void cancelOrder() {
+    public void cancelOrder(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service already Sent");
         } catch (Exception e) {

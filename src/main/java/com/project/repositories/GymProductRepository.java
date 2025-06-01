@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GymProductRepository extends JpaRepository<GymProduct, Long> {
-
 }

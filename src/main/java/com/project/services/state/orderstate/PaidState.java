@@ -7,14 +7,13 @@ import java.util.logging.Logger;
 
 public class PaidState implements State {
 
-    private ServiceOrder serviceOrder;
-
-    public PaidState(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+    @Override
+    public String getType() {
+        return "Paid";
     }
 
     @Override
-    public void successInPaying() {
+    public void successInPaying(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service already Paid");
         } catch (Exception e) {
@@ -23,12 +22,12 @@ public class PaidState implements State {
     }
 
     @Override
-    public void dispatchOrder() {
-        this.serviceOrder.setCurrentState(new SentState(serviceOrder));
+    public void dispatchOrder(ServiceOrder serviceOrder) {
+        serviceOrder.setState(new SentState());
     }
 
     @Override
-    public void cancelOrder() {
-        this.serviceOrder.setCurrentState(new CanceledState(serviceOrder));
+    public void cancelOrder(ServiceOrder serviceOrder) {
+        serviceOrder.setState(new CanceledState());
     }
 }

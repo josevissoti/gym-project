@@ -1,11 +1,15 @@
 package com.project.services.state.orderstate;
 
+import com.project.domains.ServiceOrder;
+
 public interface State {
 
-    void successInPaying();
+    String getType();
 
-    void dispatchOrder();
+    void successInPaying(ServiceOrder serviceOrder);
 
-    void cancelOrder();
+    void dispatchOrder(ServiceOrder serviceOrder);
+
+    void cancelOrder(ServiceOrder serviceOrder);
 
 }

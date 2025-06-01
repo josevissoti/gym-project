@@ -7,14 +7,13 @@ import java.util.logging.Logger;
 
 public class CanceledState implements State {
 
-    private ServiceOrder serviceOrder;
-
-    public CanceledState(ServiceOrder serviceOrder) {
-        this.serviceOrder = serviceOrder;
+    @Override
+    public String getType() {
+        return "Canceled";
     }
 
     @Override
-    public void successInPaying() {
+    public void successInPaying(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service Order Canceled");
         } catch (Exception e) {
@@ -23,7 +22,7 @@ public class CanceledState implements State {
     }
 
     @Override
-    public void dispatchOrder() {
+    public void dispatchOrder(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service Order Canceled");
         } catch (Exception e) {
@@ -32,7 +31,7 @@ public class CanceledState implements State {
     }
 
     @Override
-    public void cancelOrder() {
+    public void cancelOrder(ServiceOrder serviceOrder) {
         try {
             throw new Exception("Operation not supported - Service Order Canceled");
         } catch (Exception e) {

@@ -3,8 +3,6 @@ package com.project.services;
 import com.project.domains.*;
 import com.project.domains.enums.Status;
 import com.project.repositories.*;
-import com.project.services.strategy.orderfreight.AirFreight;
-import com.project.services.strategy.orderfreight.LandFreight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,6 +3,7 @@ package com.project.domains;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.services.state.orderstate.AwaitingPaymentState;
 import com.project.services.state.orderstate.State;
+import com.project.services.state.orderstate.StateService;
 import com.project.services.strategy.orderfreight.Freight;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
@@ -61,10 +62,15 @@ public abstract class ServiceOrder {
     private BigDecimal freightValue;
 
     @Transient
-    private State currentState;
+    private State state;
+
+    @NotBlank
+    @NotNull
+    private String currentState;
 
     public ServiceOrder() {
-        this.currentState = new AwaitingPaymentState(this);
+        this.state = new AwaitingPaymentState();
+        this.currentState = state.getType();
     }
 
     public ServiceOrder(UUID idServiceOrder, LocalDate deadline, User user, Employee employee, String freightType) {
@@ -74,20 +80,25 @@ public abstract class ServiceOrder {
         this.employee = employee;
         this.orderItems = new ArrayList<>();
         this.freightType = freightType;
-        this.currentState = new AwaitingPaymentState(this);
+        this.state = new AwaitingPaymentState();
+        this.currentState = state.getType();
     }
 
-    public BigDecimal calculateFreight() {
+    public void initializeState(StateService stateService) {
+        this.state = stateService.getState(this.currentState);
+    }
+
+    public void calculateFreight() {
         if (this.freight == null) {
             throw new IllegalStateException("Freight strategy not set");
         }
         this.freightValue = this.freight.freightCalcule(this.orderItems);
-        return this.freightValue;
     }
 
     public void successInPaying() {
         try {
-            this.currentState.successInPaying();
+            this.state.successInPaying(this);
+            this.currentState = state.getType();
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -95,7 +106,8 @@ public abstract class ServiceOrder {
 
     public void dispatchOrder() {
         try {
-            this.currentState.cancelOrder();
+            this.state.dispatchOrder(this);
+            this.currentState = state.getType();
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -103,7 +115,8 @@ public abstract class ServiceOrder {
 
     public void cancelOrder() {
         try {
-            this.currentState.dispatchOrder();
+            this.state.cancelOrder(this);
+            this.currentState = state.getType();
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -202,11 +215,19 @@ public abstract class ServiceOrder {
         this.freightValue = freightValue;
     }
 
-    public State getCurrentState() {
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public String getCurrentState() {
         return currentState;
     }
 
-    public void setCurrentState(State currentState) {
+    public void setCurrentState(String currentState) {
         this.currentState = currentState;
     }
 

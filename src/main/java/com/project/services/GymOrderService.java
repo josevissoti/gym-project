@@ -6,11 +6,8 @@ import com.project.domains.dtos.OrderItemDTO;
 import com.project.repositories.GymOrderRepository;
 import com.project.repositories.GymProductRepository;
 import com.project.services.exceptions.ObjectNotFoundException;
-import com.project.services.strategy.orderfreight.Freight;
 import com.project.services.strategy.orderfreight.FreightService;
-import com.project.services.strategy.orderfreight.LandFreight;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

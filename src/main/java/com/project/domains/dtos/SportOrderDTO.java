@@ -2,10 +2,7 @@ package com.project.domains.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.domains.SportOrder;
-import com.project.services.state.orderstate.State;
-import com.project.services.strategy.orderfreight.Freight;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
