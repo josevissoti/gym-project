@@ -1,6 +1,7 @@
 package com.project.resources.resources;
 
 import com.project.services.exceptions.DataIntegrityViolationException;
+import com.project.services.exceptions.IllegalOrderStateException;
 import com.project.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -51,6 +52,14 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(IllegalOrderStateException.class)
+    public ResponseEntity<StandardError> handleIllegalOrderStateException(IllegalOrderStateException ex, HttpServletRequest request) {
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.CONFLICT.value(),
+                "Order State Conflict", ex.getMessage(), request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 }

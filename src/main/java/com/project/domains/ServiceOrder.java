@@ -1,6 +1,7 @@
 package com.project.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.services.exceptions.IllegalOrderStateException;
 import com.project.services.state.orderstate.AwaitingPaymentState;
 import com.project.services.state.orderstate.State;
 import com.project.services.state.orderstate.StateService;
@@ -99,8 +100,10 @@ public abstract class ServiceOrder {
         try {
             this.state.successInPaying(this);
             this.currentState = state.getType();
+        } catch (IllegalOrderStateException e) {
+            throw e;
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalOrderStateException("Failed to process payment: " + e.getMessage());
         }
     }
 
@@ -108,8 +111,10 @@ public abstract class ServiceOrder {
         try {
             this.state.dispatchOrder(this);
             this.currentState = state.getType();
+        } catch (IllegalOrderStateException e) {
+            throw e;
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalOrderStateException("Failed to dispatch order: " + e.getMessage());
         }
     }
 
@@ -117,11 +122,12 @@ public abstract class ServiceOrder {
         try {
             this.state.cancelOrder(this);
             this.currentState = state.getType();
+        } catch (IllegalOrderStateException e) {
+            throw e;
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalOrderStateException("Failed to cancel order: " + e.getMessage());
         }
     }
-
     public UUID getIdServiceOrder() {
         return idServiceOrder;
     }

@@ -42,6 +42,8 @@ public class SportOrderDTO {
     @Digits(integer = 15, fraction = 3)
     private BigDecimal freightValue;
 
+    private String currentState;
+
     public SportOrderDTO() {
     }
 
@@ -60,6 +62,7 @@ public class SportOrderDTO {
                 .collect(Collectors.toList());
         this.freightType = sportOrder.getFreightType();
         this.freightValue = sportOrder.getFreightValue();
+        this.currentState = sportOrder.getCurrentState();
     }
 
     public UUID getIdServiceOrder() {
@@ -156,5 +159,9 @@ public class SportOrderDTO {
 
     public void setFreightValue(BigDecimal freightValue) {
         this.freightValue = freightValue;
+    }
+
+    public String getCurrentState() {
+        return currentState;
     }
 }

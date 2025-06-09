@@ -1,6 +1,7 @@
 package com.project.services.state.orderstate;
 
 import com.project.domains.ServiceOrder;
+import com.project.services.exceptions.IllegalOrderStateException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +20,7 @@ public class AwaitingPaymentState implements State {
 
     @Override
     public void dispatchOrder(ServiceOrder serviceOrder) {
-        try {
-            throw new Exception("Operation not supported - Service Order not Paid");
-        } catch (Exception e) {
-            Logger.getLogger(AwaitingPaymentState.class.getName()).log(Level.SEVERE, null, e);
-        }
+        throw new IllegalOrderStateException("Operation not supported - Service Order not Paid");
     }
 
     @Override

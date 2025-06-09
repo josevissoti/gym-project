@@ -1,6 +1,7 @@
 package com.project.services.state.orderstate;
 
 import com.project.domains.ServiceOrder;
+import com.project.services.exceptions.IllegalOrderStateException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,28 +15,16 @@ public class CanceledState implements State {
 
     @Override
     public void successInPaying(ServiceOrder serviceOrder) {
-        try {
-            throw new Exception("Operation not supported - Service Order Canceled");
-        } catch (Exception e) {
-            Logger.getLogger(CanceledState.class.getName()).log(Level.SEVERE, null, e);
-        }
+        throw new IllegalOrderStateException("Operation not supported - Service Order Canceled");
     }
 
     @Override
     public void dispatchOrder(ServiceOrder serviceOrder) {
-        try {
-            throw new Exception("Operation not supported - Service Order Canceled");
-        } catch (Exception e) {
-            Logger.getLogger(CanceledState.class.getName()).log(Level.SEVERE, null, e);
-        }
+        throw new IllegalOrderStateException("Operation not supported - Service Order Canceled");
     }
 
     @Override
     public void cancelOrder(ServiceOrder serviceOrder) {
-        try {
-            throw new Exception("Operation not supported - Service Order Canceled");
-        } catch (Exception e) {
-            Logger.getLogger(CanceledState.class.getName()).log(Level.SEVERE, null, e);
-        }
+        throw new IllegalOrderStateException("Operation not supported - Service Order Canceled");
     }
 }
