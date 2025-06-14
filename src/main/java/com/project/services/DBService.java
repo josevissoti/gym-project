@@ -65,20 +65,20 @@ public class DBService {
 
         Brand brand03 = new Brand(
                 null,
-                "Samsung",
+                "Technogym",
                 "11223344000155",
-                "South Korea",
-                "contact@samsung.com",
+                "Italy",
+                "contact@technogym.com",
                 Status.ACTIVATED
         );
 
         // Create products
         Product sportProduct01 = new SportProduct(
                 null,
-                "Air Max Running Shoes",
-                "AIRMAX-2023",
+                "Premier League Club Elite Soccer ball",
+                "PREMIER LEAGUE",
                 LocalDate.of(2024, Month.MARCH, 15),
-                new BigDecimal("400.00"),
+                new BigDecimal("60.00"),
                 150,
                 brand01,
                 Status.ACTIVATED
@@ -86,34 +86,34 @@ public class DBService {
 
         Product sportProduct02 = new SportProduct(
                 null,
-                "Ultraboost Shoes",
-                "ULTRABOOST-22",
+                "Nike Mercurial Vapor 16 Elite Shoes",
+                "FG Low-Top Soccer Cleats",
                 LocalDate.of(2023, Month.DECEMBER, 23),
-                new BigDecimal("800.00"),
+                new BigDecimal("350.00"),
                 80,
-                brand02,
+                brand01,
                 Status.ACTIVATED
         );
 
         Product gymProduct01 = new GymProduct(
                 null,
-                "Galaxy S23 Smartphone",
-                "GALAXY-S23",
+                "Technogym Skillmill",
+                "Skillmill",
                 LocalDate.of(2025, Month.JANUARY, 4),
                 new BigDecimal("4599.99"),
-                200,
+                100,
                 brand03,
                 Status.ACTIVATED
         );
 
         Product gymProduct02 = new GymProduct(
                 null,
-                "T-shirt Sportswear",
-                "TSHIRT-SPORT",
+                "Technogym Selection Strength",
+                "Selection Chest Press",
                 LocalDate.of(2024, Month.SEPTEMBER, 1),
-                new BigDecimal("130.00"),
-                350,
-                brand01,
+                new BigDecimal("30000.00"),
+                80,
+                brand03,
                 Status.ACTIVATED
         );
 
@@ -169,8 +169,6 @@ public class DBService {
                 Status.ACTIVATED
         );
 
-
-
         brandRepository.save(brand01);
         brandRepository.save(brand02);
         brandRepository.save(brand03);
@@ -185,3 +183,4 @@ public class DBService {
 
     }
 }
+
