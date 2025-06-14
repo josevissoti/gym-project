@@ -1,6 +1,6 @@
 <h1 align="center">Gym Project</h1>
 
-O Gym Project é um projeto sobre um serviço de uma loja virtual feita para gerenciar pedidos de produtos esportivos e de academia. O projeto implementa requisições CRUD em suas chamadas de acesso, além de fazer o uso de Design Patterns para uma possível futura expansão, possibilitando a adição de novos setores, camadas e recursos.
+<p align="justify">O Gym Project é um projeto sobre um serviço de uma loja virtual feita para gerenciar pedidos de produtos esportivos e de academia. O projeto implementa requisições CRUD em suas chamadas de acesso, além de fazer o uso de Design Patterns para uma possível futura expansão, possibilitando a adição de novos setores, camadas e recursos.</p>
 
 ## Diagrama de Classe
 
@@ -13,7 +13,19 @@ O Gym Project é um projeto sobre um serviço de uma loja virtual feita para ger
 <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/intellij.png" alt="IntelliJ" width="80"/> <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png" alt="Postman" width="80"/>
 
 ## Como Executar
-
+1. Clone o repositório
+```
+git clone https://github.com/seu-usuario/gym-sports-api.git
+```
+2. Configure o banco de dados no application.properties
+```
+spring.application.name=gym
+spring.profiles.active=test
+```
+3. Execute a aplicação:
+```
+mvn spring-boot:run
+```
 ### Principais Endpoints
 <table>
   <tr>
@@ -108,4 +120,3 @@ O Gym Project é um projeto sobre um serviço de uma loja virtual feita para ger
 * [José Pedro Vissoti](https://github.com/josevissoti)
 * [Enzo Barbosa Dourado de Almeida](https://github.com/enzo-barbosa)
 * [Marcelo Henrique Silva Ferreira](https://github.com/marcelohsf)
-* <a href="https://github.com/josevissoti" target="_blank">José Pedro Vissoti</a>
