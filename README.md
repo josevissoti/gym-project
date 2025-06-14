@@ -21,7 +21,7 @@ O Gym Project é um projeto sobre um serviço de uma loja virtual feita para ger
 git clone https://github.com/seu-usuario/gym-sports-api.git
 ```
 
-2. Configure o banco de dados no application.properties
+2. Configure o banco de dados no `application.properties`
 ```
 spring.application.name=gym
 spring.profiles.active=test
@@ -119,18 +119,74 @@ mvn spring-boot:run
 
 ## Padrões de Design
 
-Padrões de Design são conceitos reutilizaveis da Engenharia de Software, que possuem o objetivo de fornecer possíveis soluções para problemas em comum que podem surgir durante o desenvolvimento de um sistema de software. São práticas que permitem abstrair soluções de problemáticas encontradas em contextos similares de forma eficiente e flexível e, nesse caso, fazem parte de um conjunto de boas práticas que foram adotadas no sistema **gym-project** para garantir possibilidades de futuras extenções do mesmo, possibilitando uma melhoria contínua de forma rápida e adaptada para a situação.
+Padrões de Design são conceitos reutilizáveis da Engenharia de Software, que possuem o objetivo de fornecer possíveis soluções para problemas em comum que podem surgir durante o desenvolvimento de um sistema de software. São práticas que permitem abstrair soluções de problemáticas encontradas em contextos similares de forma eficiente e flexível e, nesse caso, fazem parte de um conjunto de boas práticas que foram adotadas no sistema **gym-project** para garantir possibilidades de futuras extensões do mesmo, possibilitando uma melhoria contínua de forma rápida e adaptada para a situação.
 
 ### Strategy
 
 O padrão de design Strategy se caracteriza como um padrão comportamental que permite definir uma família de algoritmos, encapsular cada um deles em classes separadas e torná-los intercambiáveis. Isso permite que o algoritmo varie independentemente dos clientes que o utilizam, seguindo o princípio do SOLID *Open/Closed*. Esse conceito separa a definição de um algoritmo da sua execução, permitindo que diferentes versões do algoritmo sejam selecionadas em tempo de execução e evitando condicionais complexos quando existem múltiplas variações de um comportamento.
+
+<div align="center"><img src="./assets/Strategy Diagram.png" alt="State Class Diagram" width="500"></div>
+
+Essa estratura é aplicada no sistema **gym-project** visando o objetivo de possibilitar que o usuário possa alternar de forma eficiente entre o estado do objeto instânciado da classe `ServiceOrder` em tempo de execução, tendo a possibilidade de modificar sua `Strategy` entre `AirFreight` e `LandFreight`, sendo esses possíveis tipos de trasnportes que podem ser escolhidos de acordo com a necessidade, fornecendo um cálculo do valor do frete que um pedido terá em cada estratégia.
+
+```
+{
+  "freightType": "airFreight",
+}
+
+{
+  "freightType": "landFreight",
+}
+```
+
+**1. AirFreight**
+
+Cálculo com aplicação de 10% do valor do pedido em transportes aéreos.
+
+```
+@Override
+public BigDecimal freightCalcule(List<OrderItem> items) {
+  if (items == null || items.isEmpty()) {
+    return BigDecimal.ZERO;
+  }
+
+  BigDecimal sum = BigDecimal.ZERO;
+  for (OrderItem item : items) {
+    BigDecimal itemValue = item.getProduct().getProductValue()
+      .multiply(BigDecimal.valueOf(item.getQuantity()));
+    sum = sum.add(itemValue);
+  }
+  return sum.multiply(BigDecimal.valueOf(0.1));
+}
+```
+
+**2. LandFreight**
+
+Cálculo com aplicação de 5% do valor do pedido em transportes terrestres.
+
+```
+@Override
+public BigDecimal freightCalcule(List<OrderItem> items) {
+  if (items == null || items.isEmpty()) {
+    return BigDecimal.ZERO;
+  }
+
+  BigDecimal sum = BigDecimal.ZERO;
+  for (OrderItem item : items) {
+    BigDecimal itemValue = item.getProduct().getProductValue()
+      .multiply(BigDecimal.valueOf(item.getQuantity()));
+    sum = sum.add(itemValue);
+  }
+  return sum.multiply(BigDecimal.valueOf(0.05));
+}
+```
 
 
 ### State
 
 O State é um padrão de design comportamental que permite que um objeto altere seu comportamento quando seu estado interno muda. Ele encapsula diferentes comportamentos em estados separadas e delega a execução para o estado atual, seguindo o princípio de que um objeto deve parecer mudar de classe quando seu estado muda. Esse conceito permite que um objeto modifique suas ações dinamicamente conforme seu estado interno evolui, evitando condicionais complexos que verificam o estado atual do objeto e tornando as transições entre estados explícitas e organizadas.
 
-<div align="center"><img src="./assets/State Diagram.png" alt="State Class Diagram" width="400"></div>
+<div align="center"><img src="./assets/State Diagram.png" alt="State Class Diagram" width="500"></div>
 
 No software **gym-project**, esse conceito é aplicado de forma na qual os objetos instânciados da classe `ServiceOrder` possam alterar seu `State` em tempo de execução, variando entre `AwaitingPayment`, `Paid`, `Sent` e `Canceled` de acordo com as solicitações do usuário. Diferentes retornos são enviados de acordo com a requisição e o estdo atual do objeto.
 
