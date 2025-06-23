@@ -18,7 +18,7 @@ O Gym Project é um projeto sobre um serviço de uma loja virtual feita para ger
 
 1. Clone o repositório
 ```
-git clone https://github.com/seu-usuario/gym-sports-api.git
+.git clone https://github.com/josevissoti/gym-project.git
 ```
 
 2. Configure o banco de dados no `application.properties`
